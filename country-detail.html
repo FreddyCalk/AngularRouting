@@ -1,5 +1,6 @@
-<h1>{{name}}</h1>
-<h4>Capital: {{capital}}</h4>
-<h4>Population: {{population | number}}</h4>
-<img src="{{flag}}" width="500" height="350"><br/>
+<h1>{{country.name}}</h1>
+<h4><a href="#/{{country.capital}}">Capital: {{country.capital}}</a></h4>
+<h4>Population: {{country.population | number}}</h4>
+<h4>Country GDP: {{country.gdp | currency}}</h4>
+<img src="{{country.flagURL}}" width="500"><br/>
 <a href="#/" class="btn btn-primary">Back</a>

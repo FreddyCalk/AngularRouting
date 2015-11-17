@@ -5,9 +5,13 @@ countryApp.config(function($routeProvider){
         templateUrl: 'country-list.html',
         controller: 'countryCntrl'        
     }).
-    when('/:countryName',{
+    when('/:firstParam',{
         templateUrl: 'country-detail.html',
         controller: 'countryDetailCntrl'
+    }).
+    when('/:countryName/:capitalName',{
+        templateURL: 'country-name.html',
+        controller: 'cityDetailCntrl'
     }).
     otherwise({
         redirectTo: '/'
@@ -21,24 +25,15 @@ countryApp.controller('countryCntrl', function($scope, $http){
 });
 
 countryApp.controller('countryDetailCntrl', function($scope, $http, $routeParams){
-    $scope.name = $routeParams.countryName;
+    var firstParam = $routeParams.firstParam;
     $http.get('js/object.json').success(function(countryDetailData){
-        var country = countryDetailData.filter(function(currCountry){
-            return currCountry.name === $scope.name;
-        })[0];
-        $scope.population = country.population;
-        $scope.flag = country.flagURL;
-        $scope.capital = country.capital;
-
-        // $scope.name = countryDetailData.name;
-        // $scope.population = countryDetailData.population;
+        for(i=0;i<countryDetailData.length;i++){
+            if(countryDetailData[i].capital === firstParam){
+                $scope.country = countryDetailData[i]
+            }
+            if(countryDetailData[i].name === firstParam){
+                $scope.country = countryDetailData[i]
+            }
+        }
     })
 });
-
-
-
-
-
-
-
-
